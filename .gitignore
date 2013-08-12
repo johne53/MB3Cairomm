@@ -147,6 +147,8 @@ local.properties
 
 # Build results
 
+/build/msvc/cairomm.vsprops
+
 [Dd]ebug/
 [Rr]elease/
 x64/
@@ -315,3 +317,4 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+

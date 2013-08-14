@@ -254,6 +254,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\cairomm\device.cc"
+				>
+			</File>
+			<File
 				RelativePath="..\..\cairomm\exception.cc"
 				>
 			</File>
@@ -317,6 +321,10 @@
 			</File>
 			<File
 				RelativePath="..\..\cairomm\context.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\cairomm\device.h"
 				>
 			</File>
 			<File

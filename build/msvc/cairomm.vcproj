@@ -18,7 +18,7 @@
 			Name="Debug 32|Win32"
 			OutputDirectory="$(ProjectDir)$(ConfigurationName)\bin"
 			IntermediateDirectory="$(ProjectDir)$(ConfigurationName)\obj\$(ProjectName)"
-			ConfigurationType="4"
+			ConfigurationType="2"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops;.\cairomm.vsprops"
 			CharacterSet="2"
 			>
@@ -44,7 +44,7 @@
 				AdditionalOptions="/FI$(TargetSxsFolder)\targetsxs.h"
 				Optimization="0"
 				AdditionalIncludeDirectories=".;&quot;$(GenericIncludeFolder)\cairo&quot;;&quot;$(GenericIncludeFolder)\freetype2&quot;;&quot;$(GenericIncludefolder)&quot;;../..;.."
-				PreprocessorDefinitions="WIN32;DEBUG;_DEBUG;_WINDOWS;G_OS_WIN32;CAIROMM_BUILD;CAIRO_HAS_WIN32_SURFACE;CAIRO_HAS_WIN32_FONT"
+				PreprocessorDefinitions="WIN32;DEBUG;_DEBUG;_USRDLL;_WINDOWS;G_OS_WIN32;CAIROMM_BUILD;CAIRO_HAS_WIN32_SURFACE;CAIRO_HAS_WIN32_FONT"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -62,14 +62,22 @@
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
+				Description="Generate Module Definition file"
+				CommandLine="cd $(IntDir)&#x0D;&#x0A;gendef32 $(TargetName).def $(TargetFileName) *.obj&#x0D;&#x0A;"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\$(DllPrefix)$(ProjectName)32$(DllSuffix)D.lib"
-				SuppressStartupBanner="true"
+				Name="VCLinkerTool"
+				AdditionalDependencies="$(DllPrefix)cairo32-2D.lib $(DllPrefix)sigc++32-2.0D.lib"
+				OutputFile="$(OutDir)\$(DllPrefix)$(ProjectName)32$(DllSuffix)D.dll"
+				ModuleDefinitionFile=" $(IntDir)\$(TargetName).def"
+				GenerateDebugInformation="true"
+				SubSystem="2"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -81,15 +89,21 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /Y &quot;$(OutDir)\$(TargetName).lib&quot; &quot;$(GenericWin32LibraryFolder)\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine="copy /Y &quot;$(OutDir)\$(TargetName).dll&quot; &quot;$(Debug32TargetFolder)\$(TargetName).dll&quot;&#x0D;&#x0A;copy /Y &quot;$(OutDir)\$(TargetName).dll&quot; &quot;$(Debug32TestSuiteFolder)\$(TargetName).dll&quot;&#x0D;&#x0A;copy /Y &quot;$(OutDir)\$(TargetName).lib&quot; &quot;$(GenericWin32LibraryFolder)\$(TargetName).lib&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
 			Name="Release 32 with Debugging Capability|Win32"
 			OutputDirectory="$(ProjectDir)$(ConfigurationName)\bin"
 			IntermediateDirectory="$(ProjectDir)$(ConfigurationName)\obj\$(ProjectName)"
-			ConfigurationType="4"
+			ConfigurationType="2"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops;.\cairomm.vsprops"
 			CharacterSet="2"
 			>
@@ -116,7 +130,7 @@
 				AdditionalOptions="/FI$(TargetSxsFolder)\targetsxs.h"
 				Optimization="0"
 				AdditionalIncludeDirectories=".;&quot;$(GenericIncludeFolder)\cairo&quot;;&quot;$(GenericIncludeFolder)\freetype2&quot;;&quot;$(GenericIncludefolder)&quot;;../..;.."
-				PreprocessorDefinitions="_SECURE_SCL=0;WIN32;NDEBUG;_WINDOWS;G_OS_WIN32;CAIROMM_BUILD;CAIRO_HAS_WIN32_SURFACE;CAIRO_HAS_WIN32_FONT"
+				PreprocessorDefinitions="_SECURE_SCL=0;WIN32;NDEBUG;_USRDLL;_WINDOWS;G_OS_WIN32;CAIROMM_BUILD;CAIRO_HAS_WIN32_SURFACE;CAIRO_HAS_WIN32_FONT"
 				StringPooling="false"
 				RuntimeLibrary="2"
 				EnableEnhancedInstructionSet="1"
@@ -134,14 +148,22 @@
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
+				Description="Generate Module Definition file"
+				CommandLine="cd $(IntDir)&#x0D;&#x0A;gendef32 $(TargetName).def $(TargetFileName) *.obj&#x0D;&#x0A;"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\$(DllPrefix)$(ProjectName)32$(DllSuffix)RDC.lib"
-				SuppressStartupBanner="true"
+				Name="VCLinkerTool"
+				AdditionalDependencies="$(DllPrefix)cairo32-2RDC.lib $(DllPrefix)sigc++32-2.0RDC.lib"
+				OutputFile="$(OutDir)\$(DllPrefix)$(ProjectName)32$(DllSuffix)RDC.dll"
+				ModuleDefinitionFile=" $(IntDir)\$(TargetName).def"
+				GenerateDebugInformation="true"
+				SubSystem="2"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -153,18 +175,24 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /Y &quot;$(OutDir)\$(TargetName).lib&quot; &quot;$(GenericWin32LibraryFolder)\$(TargetName).lib&quot;&#x0D;&#x0A;copy /Y &quot;..\..\cairomm\cairomm.h&quot; &quot;$(GenericIncludeFolder)&quot;&#x0D;&#x0A;copy /Y &quot;..\..\cairommconfig.h&quot; &quot;$(GenericIncludeFolder)&quot;&#x0D;&#x0A;copy /Y &quot;..\..\cairomm\*.h&quot; &quot;$(GenericIncludeFolder)\cairomm&quot;&#x0D;&#x0A;"
+				CommandLine="copy /Y &quot;$(OutDir)\$(TargetName).dll&quot; &quot;$(Release32TestSuiteFolder)\$(TargetName).dll&quot;&#x0D;&#x0A;copy /Y &quot;$(OutDir)\$(TargetName).lib&quot; &quot;$(GenericWin32LibraryFolder)\$(TargetName).lib&quot;&#x0D;&#x0A;copy /Y &quot;..\..\cairomm\cairomm.h&quot; &quot;$(GenericIncludeFolder)&quot;&#x0D;&#x0A;copy /Y &quot;..\..\cairommconfig.h&quot; &quot;$(GenericIncludeFolder)&quot;&#x0D;&#x0A;copy /Y &quot;..\..\cairomm\*.h&quot; &quot;$(GenericIncludeFolder)\cairomm&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
 			Name="Release 32|Win32"
 			OutputDirectory="$(ProjectDir)$(ConfigurationName)\bin"
 			IntermediateDirectory="$(ProjectDir)$(ConfigurationName)\obj\$(ProjectName)"
-			ConfigurationType="4"
+			ConfigurationType="2"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops;.\cairomm.vsprops"
 			CharacterSet="2"
-			WholeProgramOptimization="1"
+			WholeProgramOptimization="0"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -189,7 +217,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories=".;&quot;$(GenericIncludeFolder)\cairo&quot;;&quot;$(GenericIncludeFolder)\freetype2&quot;;&quot;$(GenericIncludefolder)&quot;;../..;.."
-				PreprocessorDefinitions="_SECURE_SCL=0;WIN32;NDEBUG;_WINDOWS;G_OS_WIN32;CAIROMM_BUILD;CAIRO_HAS_WIN32_SURFACE;CAIRO_HAS_WIN32_FONT"
+				PreprocessorDefinitions="_SECURE_SCL=0;WIN32;NDEBUG;_USRDLL;_WINDOWS;G_OS_WIN32;CAIROMM_BUILD;CAIRO_HAS_WIN32_SURFACE;CAIRO_HAS_WIN32_FONT"
 				StringPooling="false"
 				RuntimeLibrary="2"
 				EnableEnhancedInstructionSet="1"
@@ -206,13 +234,22 @@
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
+				Description="Generate Module Definition file"
+				CommandLine="cd $(IntDir)&#x0D;&#x0A;gendef32 $(TargetName).def $(TargetFileName) *.obj&#x0D;&#x0A;"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\$(DllPrefix)$(ProjectName)32$(DllSuffix).lib"
+				Name="VCLinkerTool"
+				AdditionalDependencies="$(DllPrefix)cairo32-2.lib $(DllPrefix)sigc++32-2.0.lib"
+				OutputFile="$(OutDir)\$(DllPrefix)$(ProjectName)32$(DllSuffix).dll"
+				ModuleDefinitionFile=" $(IntDir)\$(TargetName).def"
+				SubSystem="2"
+				OptimizeReferences="2"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -224,8 +261,14 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /Y &quot;$(OutDir)\$(TargetName).lib&quot; &quot;$(GenericWin32LibraryFolder)\$(TargetName).lib&quot;&#x0D;&#x0A;"
+				CommandLine="copy /Y &quot;$(OutDir)\$(TargetName).dll&quot; &quot;$(Release32TargetFolder)\$(TargetName).dll&quot;&#x0D;&#x0A;copy /Y &quot;$(OutDir)\$(TargetName).dll&quot; &quot;$(Release32TestSuiteFolder)\$(TargetName).dll&quot;&#x0D;&#x0A;copy /Y &quot;$(OutDir)\$(TargetName).lib&quot; &quot;$(GenericWin32LibraryFolder)\$(TargetName).lib&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -385,6 +428,14 @@
 			</File>
 			<File
 				RelativePath="..\..\cairomm\xlib_surface.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			>
+			<File
+				RelativePath=".\cairomm.rc"
 				>
 			</File>
 		</Filter>

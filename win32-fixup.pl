@@ -56,4 +56,5 @@ process_file ("cairommconfig.h");
 my $command=join(' ',@ARGV);
 if ($command eq -buildall) {
 	process_file ("build/msvc/cairomm.vsprops");
+	process_file ("build/msvc/cairomm.rc");
 }

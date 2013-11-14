@@ -10,7 +10,6 @@ $micro = 0;
 $binary_age = 1000;
 $interface_age = 0;
 $current_minus_age = 0;
-$cairomm_module_name = "libcairomm-1.10";
 $exec_prefix = "lib";
 
 sub process_file
@@ -33,7 +32,6 @@ sub process_file
 	    s/\@PERL@/$perl_path/g;
 	    s/\@prefix@/$exec_prefix/g;
 	    s/\@exec_prefix@/$exec_prefix/g;
-	    s/\@datarootdir@/$data_root_dir/g;
 	    s/\@M4@/$m4_path/g;
 	    s/\@libdir@/$generic_library_folder/g;
 	    s/\@GlibBuildRootFolder@/$glib_build_root_folder/g;
@@ -47,11 +45,23 @@ sub process_file
 	    s/\@Debug32TargetFolder@/$debug32_target_folder/g;
 	    s/\@Release32TargetFolder@/$release32_target_folder/g;
 	    s/\@TargetSxSFolder@/$target_sxs_folder/g;
+	    s/\@includedir@/$generic_include_folder/g;
+	    s/\@CAIROMM_API_VERSION\@/$api_version/g;
 	    print OUTPUT;
 	}
 }
 
+if (-1 != index($command, "-X64")) {
+	$cairomm_module_name = "libcairomm64-2.0";
+	$api_version = "64-2.0-0";
+} else {
+	$cairomm_module_name = "libcairomm32-2.0";
+	$api_version = "32-2.0-0";
+}
+
 process_file ("cairommconfig.h");
+process_file ("data/cairomm-1.0.pc");
+process_file ("data/cairomm-win32-1.0.pc");
 
 my $command=join(' ',@ARGV);
 if ($command eq -buildall) {

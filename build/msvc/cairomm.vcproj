@@ -182,7 +182,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /Y &quot;$(OutDir)\$(TargetName).dll&quot; &quot;$(Release32TestSuiteFolder)\$(TargetName).dll&quot;&#x0D;&#x0A;copy /Y &quot;$(OutDir)\$(TargetName).lib&quot; &quot;$(GenericWin32LibraryFolder)\$(TargetName).lib&quot;&#x0D;&#x0A;copy /Y &quot;..\..\cairomm\cairomm.h&quot; &quot;$(GenericIncludeFolder)&quot;&#x0D;&#x0A;copy /Y &quot;..\..\cairommconfig.h&quot; &quot;$(GenericIncludeFolder)&quot;&#x0D;&#x0A;copy /Y &quot;..\..\cairomm\*.h&quot; &quot;$(GenericIncludeFolder)\cairomm&quot;&#x0D;&#x0A;"
+				CommandLine="copy /Y &quot;$(OutDir)\$(TargetName).dll&quot; &quot;$(Release32TestSuiteFolder)\$(TargetName).dll&quot;&#x0D;&#x0A;copy /Y &quot;$(OutDir)\$(TargetName).lib&quot; &quot;$(GenericWin32LibraryFolder)\$(TargetName).lib&quot;&#x0D;&#x0A;copy /Y &quot;..\..\cairomm\cairomm.h&quot; &quot;$(GenericIncludeFolder)&quot;&#x0D;&#x0A;copy /Y &quot;..\..\cairommconfig.h&quot; &quot;$(GenericIncludeFolder)&quot;&#x0D;&#x0A;copy /Y &quot;..\..\cairomm\*.h&quot; &quot;$(GenericIncludeFolder)\cairomm&quot;&#x0D;&#x0A;copy /Y &quot;..\..\data\cairomm-1.0.pc&quot; &quot;$(GenericLibraryFolder)\pkgconfig&quot;&#x0D;&#x0A;copy /Y &quot;..\..\data\cairomm-win32-1.0.pc&quot; &quot;$(GenericLibraryFolder)\pkgconfig&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration

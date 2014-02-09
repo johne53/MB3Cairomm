@@ -108,6 +108,27 @@ public:
    */
   PatternType get_type() const;
 
+  /**
+   * Sets the mode to be used for drawing outside the area of a pattern. See
+   * Cairo::Extend for details on the semantics of each extend strategy.
+   *
+   * The default extend mode is Cairo::EXTEND_NONE for surface patterns and
+   * Cairo::EXTEND_PAD for gradient patterns.
+   *
+   * @param Cairo::Extend describing how the area outsize of the pattern will
+   *   be drawn
+   *
+   * @since 1.12
+   */
+  void set_extend(Extend extend);
+
+  /**
+   * Gets the current extend mode See Cairo::Extend for details on the
+   * semantics of each extend strategy.
+   * @since 1.12
+   */
+  Extend get_extend() const;
+
   typedef cairo_pattern_t cobject;
   inline cobject* cobj() { return m_cobject; }
   inline const cobject* cobj() const { return m_cobject; }
@@ -218,22 +239,17 @@ public:
    */
   static RefPtr<SurfacePattern> create(const RefPtr<Surface>& surface);
 
+#ifndef CAIROMM_DISABLE_DEPRECATED
   /**
-   * Sets the mode to be used for drawing outside the area of a pattern. See
-   * Cairo::Extend for details on the semantics of each extend strategy.
-   *
-   * The default extend mode is Cairo::EXTEND_NONE for surface patterns.
-   *
-   * @param Cairo::Extend describing how the area outsize of the pattern will
-   *   be drawn
+   * @deprecated Use Pattern::set_extend() instead.
    */
   void set_extend(Extend extend);
 
   /**
-   * Gets the current extend mode See Cairo::Extend for details on the
-   * semantics of each extend strategy.
+   *@deprecated Use Pattern::set_extend() instead.
    */
   Extend get_extend() const;
+#endif //CAIROMM_DISABLE_DEPRECATED
 
   /**
    * Sets the filter to be used for resizing when using this pattern.

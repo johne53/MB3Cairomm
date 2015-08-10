@@ -37,12 +37,14 @@ MM_CONFIG_DOCTOOL_DIR([docs])
 AC_SUBST([CAIROMM_SO_VERSION], [5:0:4])
 
 AC_PROG_CXX
+MM_AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
+
 AC_DISABLE_STATIC
 AC_LIBTOOL_WIN32_DLL
 AC_PROG_LIBTOOL
 PKG_PROG_PKG_CONFIG
 
-AC_SUBST([CAIROMM_MODULES], ['cairo >= 1.10.0 sigc++-2.0'])
+AC_SUBST([CAIROMM_MODULES], ['cairo >= 1.10.0 sigc++-2.0 >= 2.5.1'])
 cairomm_allmodules=$CAIROMM_MODULES
 CAIROMM_INSTALL_PC='data/cairomm-1.0.pc'
 
@@ -65,7 +67,8 @@ MM_ARG_WITH_TAGFILE_DOC([libsigc++-2.0.tag], [sigc++-2.0])
 AC_LANG([C++])
 MM_ARG_ENABLE_WARNINGS([CAIROMM_WXXFLAGS],
                        [-Wall],
-                       [-pedantic -Wall -Wextra])
+                       [-pedantic -Wall -Wextra -Wformat-security -Wsuggest-override],
+                       [SIGCXX])
 
 AC_ARG_ENABLE([tests],
               [AS_HELP_STRING([--enable-tests], [enable automated tests [default=no]])],

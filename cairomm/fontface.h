@@ -58,6 +58,8 @@ public:
    */
   explicit FontFace(cairo_font_face_t* cobject, bool has_reference = false);
 
+  FontFace(const FontFace&) = delete;
+  FontFace& operator=(const FontFace&) = delete;
 
   virtual ~FontFace();
 
@@ -88,10 +90,6 @@ public:
 protected:
 
   cobject* m_cobject;
-
-private:
-  FontFace(const FontFace&);
-  FontFace& operator=(const FontFace&);
 };
 
 
@@ -190,7 +188,7 @@ protected:
  *
  * @code
  * {
- *   Cairo::RefPtr<MyUserFont> face = MyUserFont::create();
+ *   auto face = MyUserFont::create();
  *   cr->set_font_face(face);
  * }  // scope for demonstration purposes
  *

@@ -23,7 +23,7 @@ namespace Cairo
 {
 
 Device::Device(cairo_device_t* cobject, bool has_reference)
-: m_cobject(0)
+: m_cobject(nullptr)
 {
   if(has_reference)
     m_cobject = cobject;
@@ -49,7 +49,7 @@ void Device::unreference() const
 
 DeviceType Device::get_type() const
 {
-  cairo_device_type_t surface_type =
+  auto surface_type =
     cairo_device_get_type(const_cast<cobject*>(cobj()));
   check_object_status_and_throw_exception(*this);
   return static_cast<DeviceType>(surface_type);
@@ -69,7 +69,7 @@ void Device::finish()
 
 void Device::acquire()
 {
-  ErrorStatus status = cairo_device_acquire(m_cobject);
+  auto status = cairo_device_acquire(m_cobject);
   check_status_and_throw_exception(status);
 }
 

@@ -39,10 +39,10 @@ public:
     return Cairo::RefPtr<BoxFontFace>(new BoxFontFace());
   }
 
-  virtual Cairo::ErrorStatus
+  Cairo::ErrorStatus
     init(const Cairo::RefPtr<Cairo::ScaledFont>& /*scaled_font*/,
          const Cairo::RefPtr<Cairo::Context>& /*cr*/,
-         Cairo::FontExtents &extents)
+         Cairo::FontExtents &extents) override
   {
     double max = 0;
     for (unsigned int i = 0; i < sizeof (glyphs) / sizeof (GlyphBounds); ++i) {
@@ -55,9 +55,9 @@ public:
     return CAIRO_STATUS_SUCCESS;
   }
 
-  virtual Cairo::ErrorStatus
+  Cairo::ErrorStatus
   unicode_to_glyph (const Cairo::RefPtr<Cairo::ScaledFont>& /*scaled_font*/,
-                    unsigned long unicode, unsigned long& glyph)
+                    unsigned long unicode, unsigned long& glyph) override
   {
     glyph = 0;
     // yes this is a stupid an ineffienct way to do this but we only have a few
@@ -72,11 +72,11 @@ public:
     return CAIRO_STATUS_SUCCESS;
   }
 
-  virtual Cairo::ErrorStatus
+  Cairo::ErrorStatus
   render_glyph(const Cairo::RefPtr<Cairo::ScaledFont>& /*scaled_font*/,
                unsigned long glyph,
                const Cairo::RefPtr<Cairo::Context>& cr,
-               Cairo::TextExtents& metrics)
+               Cairo::TextExtents& metrics) override
   {
     // check that the glyph is in our table
     if (glyph >= 1 && glyph <= sizeof(glyphs)/sizeof(GlyphBounds)) {
@@ -98,9 +98,9 @@ protected:
 
 int main(int, char**)
 {
-  Cairo::RefPtr<Cairo::ImageSurface> surface =
+  auto surface =
     Cairo::ImageSurface::create(Cairo::FORMAT_ARGB32, WIDTH, HEIGHT);
-  Cairo::RefPtr<Cairo::Context> cr = Cairo::Context::create(surface);
+  auto cr = Cairo::Context::create(surface);
   // fill background in white
   cr->set_source_rgb(1.0, 1.0, 1.0);
   cr->paint();
@@ -113,7 +113,7 @@ int main(int, char**)
   // draw the text
   cr->move_to(TEXT_ORIGIN_X, TEXT_ORIGIN_Y);
   cr->set_source_rgb(0.8, 0.2, 0.2);
-  Cairo::RefPtr<BoxFontFace> font = BoxFontFace::create();
+  auto font = BoxFontFace::create();
   cr->set_font_face(font);
   cr->set_font_size(FONT_SIZE);
   cr->show_text("cairomm!");
@@ -121,7 +121,7 @@ int main(int, char**)
   // Now show it with the toy text API to demonstrate how the glyphs match up
   cr->move_to(TEXT_ORIGIN_X, TEXT_ORIGIN_Y);
   cr->set_source_rgba(0.2, 0.2, 0.2, 0.3);
-  Cairo::RefPtr<Cairo::ToyFontFace> toy_font =
+  auto toy_font =
     Cairo::ToyFontFace::create("Bitstream Charter",
                                Cairo::FONT_SLANT_NORMAL,
                                Cairo::FONT_WEIGHT_BOLD);

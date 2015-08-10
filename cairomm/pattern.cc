@@ -24,12 +24,12 @@ namespace Cairo
 {
 
 Pattern::Pattern()
-: m_cobject(0)
+: m_cobject(nullptr)
 {
 }
 
 Pattern::Pattern(cairo_pattern_t* cobject, bool has_reference)
-: m_cobject(0)
+: m_cobject(nullptr)
 {
   if(has_reference)
     m_cobject = cobject;
@@ -87,7 +87,7 @@ Matrix Pattern::get_matrix() const
 
 PatternType Pattern::get_type() const
 {
-  cairo_pattern_type_t pattern_type = cairo_pattern_get_type(m_cobject);
+  auto pattern_type = cairo_pattern_get_type(m_cobject);
   check_object_status_and_throw_exception(*this);
   return static_cast<PatternType>(pattern_type);
 }
@@ -100,7 +100,7 @@ void Pattern::set_extend(Extend extend)
 
 Extend Pattern::get_extend() const
 {
-  const Extend result = static_cast<Extend>(cairo_pattern_get_extend(m_cobject));
+  const auto result = static_cast<Extend>(cairo_pattern_get_extend(m_cobject));
   check_object_status_and_throw_exception(*this);
   return result;
 }
@@ -124,7 +124,7 @@ SolidPattern::~SolidPattern()
 
 RefPtr<SolidPattern> SolidPattern::create_rgb(double red, double green, double blue)
 {
-  cairo_pattern_t* cobject = cairo_pattern_create_rgb(red, green, blue);
+  auto cobject = cairo_pattern_create_rgb(red, green, blue);
   check_status_and_throw_exception(cairo_pattern_status(cobject)); 
   return RefPtr<SolidPattern>(new SolidPattern(cobject, true /* has reference */));
 }
@@ -146,7 +146,7 @@ SurfacePattern::SurfacePattern(const RefPtr<Surface>& surface)
 RefPtr<Surface>
 SurfacePattern::get_surface()
 {
-  cairo_surface_t* surface = 0;
+  cairo_surface_t* surface = nullptr;
   // we can ignore the return value since we know this is a surface pattern
   cairo_pattern_get_surface(const_cast<cairo_pattern_t*>(m_cobject), &surface);
   check_object_status_and_throw_exception(*this);
@@ -191,7 +191,7 @@ void SurfacePattern::set_filter(Filter filter)
 
 Filter SurfacePattern::get_filter() const
 {
-  Filter result = static_cast<Filter>(cairo_pattern_get_filter(m_cobject));
+  auto result = static_cast<Filter>(cairo_pattern_get_filter(m_cobject));
   check_object_status_and_throw_exception(*this);
   return result;
 }

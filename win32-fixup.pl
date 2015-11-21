@@ -59,12 +59,12 @@ if (-1 != index($command, "-X64")) {
 	$api_version = "32-2.0-0";
 }
 
-process_file ("cairommconfig.h");
 process_file ("data/cairomm-1.0.pc");
 process_file ("data/cairomm-win32-1.0.pc");
 
 my $command=join(' ',@ARGV);
 if ($command eq -buildall) {
+	process_file ("cairommconfig.h");
 	process_file ("build/msvc/cairomm.vsprops");
 	process_file ("build/msvc/cairomm.rc");
 }
